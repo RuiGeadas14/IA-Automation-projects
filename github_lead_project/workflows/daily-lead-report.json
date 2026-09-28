@@ -1,0 +1,1076 @@
+{
+  "name": "Daily Lead Report",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 20,
+              "triggerAtMinute": 46
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        160
+      ],
+      "id": "21c099bc-8eea-4bab-95c7-09a980c9cf44",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b48b8984-40a2-4222-8da5-8b89b0e290fd",
+              "leftValue": "={{ $json.Prioridade }}",
+              "rightValue": "Alta",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        672,
+        -128
+      ],
+      "id": "b20945c4-5aac-4ec5-8170-8a201c723c5c",
+      "name": "Alta"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b3bfc2fd-b553-4747-942e-a1cc09ed77c0",
+              "leftValue": "={{ $json.Prioridade }}",
+              "rightValue": "Média",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        672,
+        48
+      ],
+      "id": "9f369f03-48f0-4bb7-ad97-80ce7088a719",
+      "name": "Média"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9663e138-dfbd-4d48-82f3-b62aad2eef74",
+              "leftValue": "={{ $json.Prioridade }}",
+              "rightValue": "Baixa",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        672,
+        240
+      ],
+      "id": "f64cb951-5f47-4591-90f4-7b1f9b0e13bd",
+      "name": "Baixa"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Leads CRM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 21787640,
+          "mode": "list",
+          "cachedResultName": "Alta",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit#gid=21787640"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nome": "={{ $json.Nome }}",
+            "E-mail": "={{ $json['E-mail'] }}",
+            "Empresa": "={{ $json.Empresa }}",
+            "Telefone": "={{ $json.Telefone }}",
+            "Serviço pretendido": "={{ $json['Serviço pretendido'] }}",
+            "Orçamento disponível": "={{ $json['Orçamento disponível'] }}",
+            "Data do projeto": "={{ $json['Data do projeto'] }}",
+            "Descrição do projeto": "={{ $json['Descrição do projeto'] }}",
+            "Prioridade": "={{ $json.Prioridade }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Empresa",
+              "displayName": "Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Telefone",
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Serviço pretendido",
+              "displayName": "Serviço pretendido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Orçamento disponível",
+              "displayName": "Orçamento disponível",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Data do projeto",
+              "displayName": "Data do projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Descrição do projeto",
+              "displayName": "Descrição do projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Prioridade",
+              "displayName": "Prioridade",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        -128
+      ],
+      "id": "af4247c6-ec23-4205-9924-543b56cc4f1c",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_N8N_CREDENTIAL_ID",
+          "name": "YOUR_N8N_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Leads CRM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1237112043,
+          "mode": "list",
+          "cachedResultName": "Média",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit#gid=1237112043"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nome": "={{ $json.Nome }}",
+            "E-mail": "={{ $json['E-mail'] }}",
+            "Empresa": "={{ $json.Empresa }}",
+            "Telefone": "={{ $json.Telefone }}",
+            "Serviço pretendido": "={{ $json['Serviço pretendido'] }}",
+            "Orçamento disponível": "={{ $json['Orçamento disponível'] }}",
+            "Data do projeto": "={{ $json['Data do projeto'] }}",
+            "Descrição do projeto": "={{ $json['Descrição do projeto'] }}",
+            "Prioridade": "={{ $json.Prioridade }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Empresa",
+              "displayName": "Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefone",
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Serviço pretendido",
+              "displayName": "Serviço pretendido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Orçamento disponível",
+              "displayName": "Orçamento disponível",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Data do projeto",
+              "displayName": "Data do projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Descrição do projeto",
+              "displayName": "Descrição do projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Prioridade",
+              "displayName": "Prioridade",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        48
+      ],
+      "id": "1bdde188-9713-4b55-bffa-c93c90da80f1",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_N8N_CREDENTIAL_ID",
+          "name": "YOUR_N8N_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Leads CRM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 978901605,
+          "mode": "list",
+          "cachedResultName": "Baixa",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit#gid=978901605"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nome": "={{ $json.Nome }}",
+            "E-mail": "={{ $json['E-mail'] }}",
+            "Empresa": "={{ $json.Empresa }}",
+            "Telefone": "={{ $json.Telefone }}",
+            "Serviço pretendido": "={{ $json['Serviço pretendido'] }}",
+            "Orçamento disponível": "={{ $json['Orçamento disponível'] }}",
+            "Data do projeto": "={{ $json['Data do projeto'] }}",
+            "Descrição do projeto": "={{ $json['Descrição do projeto'] }}",
+            "Prioridade": "={{ $json.Prioridade }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Empresa",
+              "displayName": "Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefone",
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Serviço pretendido",
+              "displayName": "Serviço pretendido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Orçamento disponível",
+              "displayName": "Orçamento disponível",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Data do projeto",
+              "displayName": "Data do projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Descrição do projeto",
+              "displayName": "Descrição do projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Prioridade",
+              "displayName": "Prioridade",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        240
+      ],
+      "id": "8da8f198-1616-4d16-8bb3-76973c99d915",
+      "name": "Append row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_N8N_CREDENTIAL_ID",
+          "name": "YOUR_N8N_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1120,
+        240
+      ],
+      "id": "2b6355c8-4b25-46b6-bc5a-225fadb0769c",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "sendTo": "team@example.com",
+        "subject": "={{ $json.subject }}",
+        "message": "={{ $json.html }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1568,
+        256
+      ],
+      "id": "71cd3bea-a461-43ae-b45a-adc108aac948",
+      "name": "Send a message",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_N8N_CREDENTIAL_ID",
+          "name": "YOUR_N8N_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const leads = $input.all();\n\nconst alta = leads.filter(item => item.json.Prioridade === 'Alta');\nconst media = leads.filter(item => item.json.Prioridade === 'Média');\nconst baixa = leads.filter(item => item.json.Prioridade === 'Baixa');\n\nfunction criarLeads(lista) {\n  return lista.slice(0, 5).map(item => {\n    const lead = item.json;\n\n    return `\n      <div style=\"margin-bottom:12px;padding:12px;border:1px solid #ddd;border-radius:8px;\">\n        <strong>${lead.Nome || 'Sem nome'}</strong>\n        ${lead.Empresa ? ` — ${lead.Empresa}` : ''}<br>\n        💼 ${lead['Serviço pretendido'] || 'Sem serviço'}<br>\n        💰 ${lead['Orçamento disponível'] || 'Sem orçamento'}<br>\n        📧 ${lead['E-mail'] || 'Sem email'}\n      </div>\n    `;\n  }).join('');\n}\n\nfunction resumoPrioridade(titulo, emoji, lista) {\n  const restantes = lista.length - 5;\n\n  return `\n    <h2>${emoji} ${titulo} — ${lista.length} leads</h2>\n    ${lista.length\n      ? criarLeads(lista)\n      : '<p>Nenhum lead nesta categoria.</p>'}\n    ${restantes > 0\n      ? `<p><strong>+ ${restantes} outros leads</strong> — consulte o Google Sheets.</p>`\n      : ''}\n  `;\n}\n\nconst data = new Date().toLocaleDateString('pt-PT');\n\nconst html = `\n<div style=\"font-family:Arial,sans-serif;max-width:700px;margin:auto;\">\n\n  <h1>📊 Relatório Diário de Leads</h1>\n  <p>Data: <strong>${data}</strong></p>\n\n  <div style=\"padding:15px;background:#f5f5f5;border-radius:8px;margin-bottom:25px;\">\n    <strong>Resumo do dia</strong><br><br>\n    🔴 Alta: <strong>${alta.length}</strong><br>\n    🟡 Média: <strong>${media.length}</strong><br>\n    🟢 Baixa: <strong>${baixa.length}</strong><br>\n    📊 Total: <strong>${leads.length}</strong>\n  </div>\n\n  ${resumoPrioridade('Alta Prioridade', '🔴', alta)}\n\n  ${resumoPrioridade('Média Prioridade', '🟡', media)}\n\n  ${resumoPrioridade('Baixa Prioridade', '🟢', baixa)}\n\n  <p style=\"margin-top:30px;color:#666;\">\n    Os restantes leads podem ser consultados no Google Sheets.\n  </p>\n\n</div>\n`;\n\nreturn [{\n  json: {\n    subject: `📊 Relatório Diário de Leads — ${data}`,\n    html\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        256
+      ],
+      "id": "b09cdfc0-9b6c-4eb9-92ac-6ce29e829333",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Leads CRM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 877252859,
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit#gid=877252859"
+        },
+        "filtersUI": {
+          "values": []
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        160
+      ],
+      "id": "46c5d39d-56e4-4d05-af8a-313b703cc866",
+      "name": "Obter o sheets atualizado",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_N8N_CREDENTIAL_ID",
+          "name": "YOUR_N8N_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Leads CRM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 877252859,
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit#gid=877252859"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "E-mail": "={{ $json['E-mail'] }}",
+            "Relatório Enviado": "Sim"
+          },
+          "matchingColumns": [
+            "E-mail"
+          ],
+          "schema": [
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Empresa",
+              "displayName": "Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Telefone",
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Serviço pretendido",
+              "displayName": "Serviço pretendido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Orçamento disponível",
+              "displayName": "Orçamento disponível",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Data do projeto",
+              "displayName": "Data do projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Descrição do projeto",
+              "displayName": "Descrição do projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Prioridade",
+              "displayName": "Prioridade",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Relatório Enviado",
+              "displayName": "Relatório Enviado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2016,
+        256
+      ],
+      "id": "748c8954-73c4-4fc5-a282-5f994cbcfe78",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_N8N_CREDENTIAL_ID",
+          "name": "YOUR_N8N_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6c26b773-04e2-47ee-b168-3f8b173e2aa6",
+              "leftValue": "={{ $input.all().some(item => item.json['Relatório Enviado'] === 'Não') }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        160
+      ],
+      "id": "03f67770-faf6-48ab-840c-7c5e4272dbca",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Leads CRM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 877252859,
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit#gid=877252859"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Relatório Enviado",
+              "lookupValue": "Não"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1792,
+        256
+      ],
+      "id": "9bbb4b07-0d1f-4ca9-8632-014b08d3593d",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_N8N_CREDENTIAL_ID",
+          "name": "YOUR_N8N_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "team@example.com",
+        "subject": "Relatório diário de leads",
+        "message": "<div style=\"font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;\">    <h2 style=\"color: #222;\">Relatório Diário de Leads</h2>    <p>Olá, equipa,</p>    <p>     O relatório diário foi processado com sucesso.   </p>    <p>     <strong>Hoje não foram recebidos novos leads através do formulário.</strong>   </p>    <p>     Não existem novos contactos para analisar neste momento.   </p>    <p>     O sistema continuará a acompanhar automaticamente os novos pedidos     e o próximo relatório será enviado quando existirem novos leads.   </p>    <p>     Cumprimentos,<br>     <strong>Nexa Digital</strong><br>     <span style=\"color: #777;\">Sistema de Automação de Leads</span>   </p>  </div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        448
+      ],
+      "id": "87bd30d5-5b01-4a18-8653-3f35170676d3",
+      "name": "Send a message1",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_N8N_CREDENTIAL_ID",
+          "name": "YOUR_N8N_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        672,
+        448
+      ],
+      "id": "1457a75e-bdc3-4d77-867e-e67d3f4a4330",
+      "name": "Limit"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Obter o sheets atualizado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alta": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Média": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixa": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obter o sheets atualizado": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Alta",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Média",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Baixa",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c73887f4-0a89-49ed-a325-fc7b4f93eea5",
+  "nodeGroups": [],
+  "tags": [
+    {
+      "updatedAt": "2026-09-28T19:32:33.990Z",
+      "createdAt": "2026-09-28T19:32:33.990Z",
+      "id": "oeZFuDXwjzcytLde",
+      "name": "Nexus- Teste"
+    }
+  ]
+}
